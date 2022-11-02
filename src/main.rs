@@ -3,8 +3,7 @@ mod git;
 use dotenv::dotenv;
 use git::Git;
 
-// TODO: Change gql_client to graphql_client
-// TODO: env manager
+// TODO: Change gql_client to graphql_client or reqwest with json.
 
 #[tokio::main]
 async fn main() {

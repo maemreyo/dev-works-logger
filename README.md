@@ -26,3 +26,10 @@ Should follow:
 *Bonuses*
 - Add more things like most amount of issues, most amount of reviews and so on.
 ---
+## What did I do?
+- [x] Write REQUIREMENTS
+- [x] Manage env variables with `dotenv`
+- [x] Learn how to fetch data from GraphQL Github with gql_client
+- [x] Create a function to get all the recent commit in a repo
+- [ ] Refactor: instead of using gql_client, I plan to change it to reqwest with json body
+- [ ] Research GraphQL to get the recent commit over all repos

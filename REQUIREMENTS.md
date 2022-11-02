@@ -1,5 +1,6 @@
 # TODO
 
-- [ ] Github
+- [ ] GraphQL Github
 - [ ] Cronjob
-- [ ] 
+- [ ] Twitter API
+- [ ] Discord API
