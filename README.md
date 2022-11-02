@@ -31,7 +31,7 @@ Should follow:
 - [x] Manage env variables with `dotenv`
 - [x] Learn how to fetch data from GraphQL Github with gql_client
 - [x] Create a function to get all the recent commit in a repo
-- [ ] Research GraphQL to get the recent commit over all repos
+- [x] Research GraphQL to get the recent commit over all repos
 - [ ] Refactor: instead of using gql_client, I plan to change it to reqwest with json body
 - [ ] (Optional) Research CI/CD on Github Action
 - [ ] Twitter API
