@@ -1,0 +1,12 @@
+# Fuchsia uses mostly 2021 edition
+edition = "2021"
+
+# Run rustfmt with this config (it should be picked up automatically).
+use_small_heuristics = "Max"
+merge_derives = false
+
+use_field_init_shorthand = true
+use_try_shorthand = true
+
+# Prevent carriage returns
+newline_style = "Unix"
