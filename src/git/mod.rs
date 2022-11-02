@@ -69,14 +69,33 @@ pub struct Vars {
 }
 
 impl Git {
-    pub async fn get_latest_commit_by_repo(client: Client, repo: &str, owner: &str, quantity: u16) {
+    pub async fn get_latest_commit_by_repo(
+        client: Client,
+        repo: &str,
+        owner: &str,
+        quantity: u16,
+    ) {
         let query = Query::query_latest_commit_by_repo();
-        let vars = Vars { repo: repo.to_owned(), owner: owner.to_owned(), quantity };
-        let provider =
-            client.query_with_vars_unwrap::<Repository, Vars>(query.as_str(), vars).await.unwrap();
+        let vars = Vars {
+            repo: repo.to_owned(),
+            owner: owner.to_owned(),
+            quantity,
+        };
+        let provider = client
+            .query_with_vars_unwrap::<Repository, Vars>(
+                query.as_str(),
+                vars,
+            )
+            .await
+            .unwrap();
 
-        for commit in &provider.repository.default_branch_ref.target.edges {
-            println!("{} | {} | {}", commit.oid, commit.message, commit.committed_date);
+        for commit in
+            &provider.repository.default_branch_ref.target.edges
+        {
+            println!(
+                "{} | {} | {}",
+                commit.oid, commit.message, commit.committed_date
+            );
         }
     }
 
