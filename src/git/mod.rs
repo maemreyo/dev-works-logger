@@ -10,56 +10,76 @@ use serde::{Deserialize, Serialize};
 
 pub struct Git;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Root {
+    pub data: Data,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Data {
-    data: Repository,
+    pub repository: Repository,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Repository {
-    repository: DefaultBranchRef,
+    pub default_branch_ref: DefaultBranchRef,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(rename_all = "snake_case")]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct DefaultBranchRef {
-    default_branch_ref: Target,
+    pub target: Target,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Target {
-    target: History,
+    pub history: History,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct History {
-    page_info: PageInfo,
-    edges: Vec<Commit>,
+    pub page_info: PageInfo,
+    pub edges: Vec<Edge>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Commit {
-    oid: String,
-    message: String,
-    author: Author,
-    commit_url: String,
-    committed_date: String,
-    changed_files: u64,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct PageInfo {
-    has_next_page: bool,
-    has_previous_page: bool,
+    pub has_next_page: bool,
+    pub has_previous_page: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Author {
-    name: String,
-    email: String,
-    date: String,
-    avatar_url: String,
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Edge {
+    pub node: Node,
 }
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Node {
+    pub oid: String,
+    pub message: String,
+    pub author: Author,
+    pub commit_url: String,
+    pub committed_date: String,
+    pub changed_files: i64,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Author {
+    pub name: String,
+    pub email: String,
+    pub date: String,
+    pub avatar_url: String,
+}
+
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Vars {
@@ -81,20 +101,20 @@ impl Git {
             owner: owner.to_owned(),
             quantity,
         };
-        let provider = client
-            .query_with_vars_unwrap::<Repository, Vars>(
+        let response = client
+            .query_with_vars_unwrap::<Data, Vars>(
                 query.as_str(),
                 vars,
             )
             .await
             .unwrap();
-
-        for commit in
-            &provider.repository.default_branch_ref.target.edges
+		println!("RESPONSE: {:?}", response);
+        for edge in
+            &response.repository.default_branch_ref.target.history.edges
         {
             println!(
                 "{} | {} | {}",
-                commit.oid, commit.message, commit.committed_date
+                edge.node.author.name, edge.node.message, edge.node.changed_files
             );
         }
     }
@@ -124,5 +144,28 @@ impl Git {
     //   }
     // }
     //     todo!()
+    // }
+
+	// pub fn recent_active_repos() -> String {
+    //     String::from(
+    //         r#"query MyQuery($login: String, $first: Int = 5) {
+	// 			repositoryOwner(login: $login) {
+	// 			  repositories(
+	// 				orderBy: {field: PUSHED_AT, direction: DESC}
+	// 				isFork: false
+	// 				first: $first
+	// 			  ) {
+	// 				edges {
+	// 				  node {
+	// 					name
+	// 					description
+	// 					pushedAt
+	// 				  }
+	// 				}
+	// 			  }
+	// 			  avatarUrl
+	// 			}
+	// 		  }"#,
+    //     )
     // }
 }
