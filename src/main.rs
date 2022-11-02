@@ -4,6 +4,9 @@ use git::Git;
 
 mod git;
 
+// TODO: Change gql_client to graphql_client
+// TODO: env manager
+
 #[tokio::main]
 async fn main() {
     let endpoint = "https://api.github.com/graphql";
