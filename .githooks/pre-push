@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -eu
+
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
+if ! cargo fmt -- --check
+then
+    echo "${red}There are some code style issues.${reset}"
+    echo "${red}Run ${green}cargo fmt${reset} first."
+	cargo fmt
+    exit 1
+fi
+
+if ! cargo clippy --all-targets -- -D warnings
+then
+    echo "There are some clippy issues."
+	cargo clippy
+    exit 1
+fi
+
+if ! cargo test
+then
+    echo "There are some test issues."
+    exit 1
+fi
+
+exit 0
+
+if cog check; then
+    exit 0
+fi
+
+echo "Invalid commits were found, force push with '--no-verify'"
+exit 1
