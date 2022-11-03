@@ -44,7 +44,10 @@ Should follow:
   - [x] +---- mod.rs
 - [x] Research about Git hooks
 - [ ] Twitter API
-- [ ] Discord API
+- [ ] Discord API (50%)
+  - [x] Enable Webhook on a specific channel for Discord via Github
+  - [ ] Enable Webhook on a specific channel for Discord via Rust
+    - [ ] Need to explore about WebSocket
 - [ ] (Optional) Research CI/CD on Github Action
 - [ ] Cronjob or Github Action?
 - [ ] Docker? (No ideas)
