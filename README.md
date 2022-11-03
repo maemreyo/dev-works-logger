@@ -44,7 +44,8 @@ Should follow:
   - [x] +---- mod.rs
 - [x] Research about Git hooks
 - [ ] Twitter API
-- [ ] Discord API
+- [ ] Discord
+  - [x] Enable Github Webhook for Discord
 - [ ] (Optional) Research CI/CD on Github Action
 - [ ] Cronjob or Github Action?
 - [ ] Docker? (No ideas)
