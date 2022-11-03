@@ -9,7 +9,7 @@ reset=`tput sgr0`
 if ! cargo fmt -- --check
 then
     echo "${red}There are some code style issues.${reset}"
-    echo "${red}Run ${green}cargo fmt${reset} first."
+    echo "Run ${green}cargo fmt${reset} first."
 	cargo fmt
     exit 1
 fi
