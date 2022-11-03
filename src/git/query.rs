@@ -1,14 +1,14 @@
 pub struct Query;
 
 impl Query {
-    pub fn query_latest_commit_by_repo() -> String {
+    pub fn latest_commit_by_repo() -> String {
         String::from(
-            r#"query MyQuery($name: String = "git-stats-bot", $owner: String = "maemreyo", $first: Int = 10) {
-				repository(name: $name, owner: $owner) {
+            r#"query LatestCommitsByRepo($repo: String!, $owner: String!, $quantity: Int!) {
+				repository(name: $repo, owner: $owner) {
 				  defaultBranchRef {
 					target {
 					  ... on Commit {
-						history(first: $first) {
+						history(first: $quantity) {
 						  pageInfo {
 							hasNextPage
 							hasPreviousPage

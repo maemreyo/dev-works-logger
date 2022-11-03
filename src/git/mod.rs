@@ -80,7 +80,6 @@ pub struct Author {
     pub avatar_url: String,
 }
 
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Vars {
     repo: String,
@@ -95,7 +94,7 @@ impl Git {
         owner: &str,
         quantity: u16,
     ) {
-        let query = Query::query_latest_commit_by_repo();
+        let query = Query::latest_commit_by_repo();
         let vars = Vars {
             repo: repo.to_owned(),
             owner: owner.to_owned(),
@@ -108,13 +107,18 @@ impl Git {
             )
             .await
             .unwrap();
-		println!("RESPONSE: {:?}", response);
-        for edge in
-            &response.repository.default_branch_ref.target.history.edges
+        for edge in &response
+            .repository
+            .default_branch_ref
+            .target
+            .history
+            .edges
         {
             println!(
                 "{} | {} | {}",
-                edge.node.author.name, edge.node.message, edge.node.changed_files
+                edge.node.author.name,
+                edge.node.message,
+                edge.node.changed_files
             );
         }
     }
@@ -146,26 +150,26 @@ impl Git {
     //     todo!()
     // }
 
-	// pub fn recent_active_repos() -> String {
+    // pub fn recent_active_repos() -> String {
     //     String::from(
     //         r#"query MyQuery($login: String, $first: Int = 5) {
-	// 			repositoryOwner(login: $login) {
-	// 			  repositories(
-	// 				orderBy: {field: PUSHED_AT, direction: DESC}
-	// 				isFork: false
-	// 				first: $first
-	// 			  ) {
-	// 				edges {
-	// 				  node {
-	// 					name
-	// 					description
-	// 					pushedAt
-	// 				  }
-	// 				}
-	// 			  }
-	// 			  avatarUrl
-	// 			}
-	// 		  }"#,
+    // 			repositoryOwner(login: $login) {
+    // 			  repositories(
+    // 				orderBy: {field: PUSHED_AT, direction: DESC}
+    // 				isFork: false
+    // 				first: $first
+    // 			  ) {
+    // 				edges {
+    // 				  node {
+    // 					name
+    // 					description
+    // 					pushedAt
+    // 				  }
+    // 				}
+    // 			  }
+    // 			  avatarUrl
+    // 			}
+    // 		  }"#,
     //     )
     // }
 }
