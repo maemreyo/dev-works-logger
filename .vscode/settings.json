@@ -6,6 +6,6 @@
 		"hello"
 	],
 	"files.exclude": {
-		"**/.git": false
+		"**/.git": true
 	}
 }
