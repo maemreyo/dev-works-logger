@@ -42,6 +42,7 @@ Should follow:
   - [x] +------ module1.rs
   - [x] +------ module2.rs
   - [x] +---- mod.rs
+- [ ] Research about Git hooks
 - [ ] (Optional) Research CI/CD on Github Action
 - [ ] Twitter API
 - [ ] Discord API
