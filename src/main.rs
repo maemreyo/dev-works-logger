@@ -24,8 +24,14 @@ async fn main() {
         gql_client::Client::new_with_headers(endpoint, headers);
 
     Git::get_latest_commit_by_repo(
-        client,
+        &client,
         "git-stats-bot",
+        &dotenv::var("GITHUB_USERNAME").expect("Username not found"),
+        5,
+    )
+    .await;
+    Git::get_recent_active_repos(
+        &client,
         &dotenv::var("GITHUB_USERNAME").expect("Username not found"),
         5,
     )
