@@ -1,9 +1,13 @@
 {
 	"cSpell.words": [
+		"clippy",
+		"defination",
 		"dotenv",
+		"fommat",
+		"hello",
 		"maemreyo",
 		"reqwest",
-		"hello"
+		"rustfmt"
 	],
 	"files.exclude": {
 		"**/.git": true
