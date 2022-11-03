@@ -130,7 +130,7 @@ pub struct Node {
     pub author: Author,
     pub commit_url: String,
     pub committed_date: String,
-    pub changed_files: i64,
+    pub changed_files: u64,
 }
 
 #[derive(
