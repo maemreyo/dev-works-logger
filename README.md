@@ -43,8 +43,13 @@ Should follow:
   - [x] +------ module2.rs
   - [x] +---- mod.rs
 - [x] Research about Git hooks
-- [ ] (Optional) Research CI/CD on Github Action
 - [ ] Twitter API
 - [ ] Discord API
+- [ ] (Optional) Research CI/CD on Github Action
 - [ ] Cronjob or Github Action?
 - [ ] Docker? (No ideas)
+
+## How to run this project?
+
+### Install
+- Run `Makefile` with `make -f Makefile`
