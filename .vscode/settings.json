@@ -2,7 +2,8 @@
 	"cSpell.words": [
 		"dotenv",
 		"maemreyo",
-		"reqwest"
+		"reqwest",
+		"hello"
 	],
 	"files.exclude": {
 		"**/.git": false
