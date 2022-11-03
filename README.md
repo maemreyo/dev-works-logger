@@ -33,8 +33,9 @@ Should follow:
 - [x] Create a function to get all the recent commit in a repo
 - [x] Research GraphQL to get the recent commit over all repos
 - [ ] Refactor: instead of using gql_client, I plan to change it to reqwest with json body
+  - [ ] Create my own request client
 - [ ] (Optional) Research CI/CD on Github Action
 - [ ] Twitter API
 - [ ] Discord API
-- [ ] Cronjob
+- [ ] Cronjob or Github Action?
 - [ ] Docker? (No ideas)
