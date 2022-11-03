@@ -11,7 +11,7 @@ pub struct LatestCommitVars {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct RecentCommitVars {
-    pub user: String,
+    pub owner: String,
     pub quantity: u16,
 }
 
@@ -54,8 +54,8 @@ impl Query {
 
     pub fn recent_active_repos() -> String {
         String::from(
-            r#"query MyQuery($login: String!, $quantity: Int!) {
-    			repositoryOwner(login: $login) {
+            r#"query RecentActiveRepos($owner: String!, $quantity: Int!) {
+    			repositoryOwner(login: $owner) {
     			  repositories(
     				orderBy: {field: PUSHED_AT, direction: DESC}
     				isFork: false
@@ -66,6 +66,7 @@ impl Query {
     					name
     					description
     					pushedAt
+						url
     				  }
     				}
     			  }

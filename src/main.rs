@@ -7,7 +7,15 @@ use git::Git;
 
 #[tokio::main]
 async fn main() {
+    // Initialize env variables
     dotenv().ok();
+
+    // Initialize gql_client
+    // endpoint
+    // headers
+    // auth token
+    // user-agent
+
     let endpoint =
         dotenv::var("GRAPHQL_ENDPOINT").expect("Endpoint not found");
     let mut headers = HashMap::new();
@@ -19,21 +27,22 @@ async fn main() {
                 .expect("PAC not found")
         ),
     );
-    headers.insert("user-agent", "PostmanRuntime/7.29.2".to_string());
+    headers.insert(
+        "user-agent",
+        dotenv::var("USER_AGENT").expect("User-agent not found"),
+    );
+    // Client
     let client =
         gql_client::Client::new_with_headers(endpoint, headers);
 
-    Git::get_latest_commit_by_repo(
-        &client,
-        "git-stats-bot",
-        &dotenv::var("GITHUB_USERNAME").expect("Username not found"),
-        5,
-    )
-    .await;
-    Git::get_recent_active_repos(
+    // Trigger action to get latest commits of repos
+    let result = Git::get_latest_commits(
         &client,
         &dotenv::var("GITHUB_USERNAME").expect("Username not found"),
-        5,
+        Some(2),
+        None,
     )
-    .await;
+    .await
+    .unwrap();
+    println!("RESULT: {:?}", result);
 }

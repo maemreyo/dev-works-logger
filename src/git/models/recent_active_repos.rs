@@ -85,6 +85,5 @@ pub struct Node {
     pub name: String,
     pub description: String,
     pub pushed_at: String,
-    pub id: String,
     pub url: String,
 }
