@@ -32,8 +32,8 @@ Should follow:
 - [x] Learn how to fetch data from GraphQL Github with gql_client
 - [x] Create a function to get all the recent commit in a repo
 - [x] Research GraphQL to get the recent commit over all repos
-- [ ] Refactor: instead of using gql_client, I plan to change it to reqwest with json body (Not yet)
-  - [ ] Create my own request client (Not yet)
+- [ ] Refactor: instead of using gql_client, I plan to change it to reqwest with json body
+  - [ ] Create my own request client
 - [x] Refactor folder structure
   - [x] +-- main.rs
   - [x] +-- git
