@@ -13,6 +13,7 @@ impl CustomizedGqlClient {
 
         let endpoint = dotenv::var("GRAPHQL_ENDPOINT")
             .expect("Endpoint not found");
+        // let endpoint = "https://api.github.com/graphql";
         let mut headers = HashMap::new();
         headers.insert(
             "authorization",
