@@ -19,34 +19,35 @@ pub(crate) async fn run_cron(mut sched: JobScheduler) -> Result<()> {
     }));
 
     // let mut job = Job::new_async("0 0 14 ? * * *", |uuid, mut l| {
-    let mut job = Job::new_async("3 5,9,11,13,15 * ? * * *", |uuid, mut l| {
-        Box::pin(async move {
-            info!("I run async, id {:?}", uuid);
+    let mut job =
+        Job::new_async("3 5,9,11,13,15 * ? * * *", |uuid, mut l| {
+            Box::pin(async move {
+                info!("I run async, id {:?}", uuid);
 
-            // Initialize GQL Client
-            let client = CustomizedGqlClient::new_client();
-            // Trigger action to get latest commits of repos
-            let result = Git::get_latest_commits(
-                &client,
-                &dotenv::var("GITHUB_USERNAME")
-                    .expect("Username not found"),
-                Some(2),
-                None,
-            )
-            .await
-            .unwrap();
-            info!("Response: {:?}", "OK");
+                // Initialize GQL Client
+                let client = CustomizedGqlClient::new_client();
+                // Trigger action to get latest commits of repos
+                let result = Git::get_latest_commits(
+                    &client,
+                    &dotenv::var("GITHUB_USERNAME")
+                        .expect("Username not found"),
+                    Some(2),
+                    None,
+                )
+                .await
+                .unwrap();
+                info!("Response: {:?}", "OK");
 
-            let next_tick = l.next_tick_for_job(uuid).await;
-            match next_tick {
-                Ok(Some(ts)) => {
-                    info!("Next time is {:?}", ts)
+                let next_tick = l.next_tick_for_job(uuid).await;
+                match next_tick {
+                    Ok(Some(ts)) => {
+                        info!("Next time is {:?}", ts)
+                    }
+                    _ => warn!("Could not get next tick for 59s job"),
                 }
-                _ => warn!("Could not get next tick for 59s job"),
-            }
+            })
         })
-    })
-    .unwrap();
+        .unwrap();
 
     let job_clone = job.clone();
     let js = sched.clone();
