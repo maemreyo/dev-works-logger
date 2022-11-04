@@ -1,40 +1,15 @@
-use std::collections::HashMap;
 mod git;
+pub mod gql_client;
 use dotenv::dotenv;
 use git::Git;
-
-// TODO: Change gql_client to graphql_client or reqwest with json.
 
 #[tokio::main]
 async fn main() {
     // Initialize env variables
     dotenv().ok();
 
-    // Initialize gql_client
-    // endpoint
-    // headers
-    // auth token
-    // user-agent
-
-    let endpoint =
-        dotenv::var("GRAPHQL_ENDPOINT").expect("Endpoint not found");
-    let mut headers = HashMap::new();
-    headers.insert(
-        "authorization",
-        format!(
-            "Bearer {}",
-            dotenv::var("GITHUB_PERSONAL_ACCESS_TOKEN")
-                .expect("PAC not found")
-        ),
-    );
-    headers.insert(
-        "user-agent",
-        dotenv::var("USER_AGENT").expect("User-agent not found"),
-    );
-    // Client
-    let client =
-        gql_client::Client::new_with_headers(endpoint, headers);
-
+    // Initialize GQL Client
+    let client = gql_client::GqlClient::new_client();
     // Trigger action to get latest commits of repos
     let result = Git::get_latest_commits(
         &client,
