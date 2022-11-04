@@ -1,23 +1,18 @@
+pub mod cron;
 mod git;
 pub mod gql_client;
-use dotenv::dotenv;
-use git::Git;
+pub mod init;
+use init::init;
+extern crate log;
+
+use crate::cron::run_cron;
+use tokio_cron_scheduler::JobScheduler;
 
 #[tokio::main]
 async fn main() {
-    // Initialize env variables
-    dotenv().ok();
+    init();
 
-    // Initialize GQL Client
-    let client = gql_client::GqlClient::new_client();
-    // Trigger action to get latest commits of repos
-    let result = Git::get_latest_commits(
-        &client,
-        &dotenv::var("GITHUB_USERNAME").expect("Username not found"),
-        Some(2),
-        None,
-    )
-    .await
-    .unwrap();
-    println!("RESULT: {:?}", result);
+    let sched = JobScheduler::new().await;
+    let sched = sched.unwrap();
+    run_cron(sched).await.unwrap();
 }
