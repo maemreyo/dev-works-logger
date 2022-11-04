@@ -46,8 +46,11 @@ Should follow:
 - [ ] Twitter API
 - [ ] Discord
   - [x] Enable Github Webhook for Discord
+  - [ ] Discord Bot
 - [ ] (Optional) Research CI/CD on Github Action
-- [ ] Cronjob or Github Action?
+- [x] Cronjob or Github Action?
+  - [x] Cronjob
+  - [ ] Github Action?
 - [ ] Docker? (No ideas)
 
 ## How to run this project?
