@@ -3,6 +3,7 @@ pub mod models;
 use anyhow::Result;
 use gql_client::Client;
 use log::{debug, info};
+use serde::{Deserialize, Serialize};
 
 use self::models::latest_commit::Data as LatestCommitDataModel;
 use self::models::query::{
@@ -18,7 +19,7 @@ use self::models::recent_active_repos::Data as RecentActiveReposDataModel;
 
 pub struct Git;
 
-#[derive(Debug)]
+#[derive(Default, Debug, Serialize, Deserialize)]
 pub struct Commit {
     author: String,
     message: String,
@@ -34,7 +35,7 @@ pub struct Repo {
     url: String,
 }
 
-#[derive(Debug)]
+#[derive(Default, Debug, Serialize, Deserialize)]
 pub struct LatestCommits {
     repo: String,
     description: String,
