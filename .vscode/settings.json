@@ -3,12 +3,15 @@
 		"chrono",
 		"clippy",
 		"defination",
+		"dockerfiles",
 		"dotenv",
 		"fommat",
 		"hello",
 		"maemreyo",
 		"reqwest",
+		"rustc",
 		"rustfmt",
+		"rustup",
 		"sched"
 	],
 	"files.exclude": {

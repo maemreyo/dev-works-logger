@@ -32,7 +32,7 @@ jobs:
 
 
       - name: Build Docker image
-        run: docker build -t registry.heroku.com/${{ secrets.HEROKU_APP }}/web:latest .
+        run: docker build -t registry.heroku.com/${{ secrets.HEROKU_APP }}/web:latest -f dockerfiles/rust-app/Dockerfile .
 
       - name: Docker image info
         run: docker images
