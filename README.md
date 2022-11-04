@@ -1,5 +1,5 @@
 # git-stats-bot
-[![CI](https://github.com/maemreyo/git-stats-bot/actions/workflows/ci.yml/badge.svg)](https://github.com/maemreyo/git-stats-bot/actions/workflows/ci.yml)
+[![CI](https://github.com/maemreyo/git-stats-bot/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/maemreyo/git-stats-bot/actions/workflows/ci.yml)
 [![Rust](https://github.com/maemreyo/git-stats-bot/actions/workflows/rust.yml/badge.svg)](https://github.com/maemreyo/git-stats-bot/actions/workflows/rust.yml)
 Build a bot to collect data from Git
 
