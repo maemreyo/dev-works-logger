@@ -1,9 +1,9 @@
 use gql_client::Client;
 use std::collections::HashMap;
 
-pub(crate) struct GqlClient;
+pub(crate) struct CustomizedGqlClient;
 
-impl GqlClient {
+impl CustomizedGqlClient {
     pub fn new_client() -> Client {
         // Initialize gql_client
         // endpoint
