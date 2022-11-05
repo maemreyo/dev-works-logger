@@ -12,6 +12,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Docker image
+        env:
+          GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GRAPHQL_ENDPOINT: https://api.github.com/graphql
+          GITHUB_USERNAME: maemreyo
+          USER_AGENT: PostmanRuntime/7.29.2
         run: docker build -t registry.heroku.com/${{ secrets.HEROKU_APP }}/web:latest -f dockerfiles/rust-app/Dockerfile .
 
       - name: Docker image info
