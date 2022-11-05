@@ -2,36 +2,27 @@ name: CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
-
-  release:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Build Docker image
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "YOUR APP's NAME" #Must be unique in Heroku
+          heroku_email: "YOUR EMAIL"
+          usedocker: true
+          docker_build_args: |
+            GITHUB_PERSONAL_ACCESS_TOKEN
+            GRAPHQL_ENDPOINT
+            GITHUB_USERNAME
+            USER_AGENT
         env:
           GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GRAPHQL_ENDPOINT: https://api.github.com/graphql
           GITHUB_USERNAME: maemreyo
           USER_AGENT: PostmanRuntime/7.29.2
-        run: docker build -t registry.heroku.com/${{ secrets.HEROKU_APP }}/web:latest -f dockerfiles/rust-app/Dockerfile .
-
-      - name: Docker image info
-        run: docker images
-
-      - name: Login to container registry
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:login
-
-      - name: Push Docker image
-        # see here for the details of the release phase https://devcenter.heroku.com/articles/container-registry-and-runtime#release-phase
-        run: docker push registry.heroku.com/${{ secrets.HEROKU_APP }}/web
-
-      - name: Release
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:release -a ${{ secrets.HEROKU_APP }} web
