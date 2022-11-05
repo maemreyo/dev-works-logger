@@ -12,9 +12,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "dev-works-logger" #Must be unique in Heroku
-          heroku_email: "ngonhuthanhtrung1409@gmail.com"
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
           usedocker: true
           docker_build_args: |
             GITHUB_PERSONAL_ACCESS_TOKEN
@@ -22,7 +22,7 @@ jobs:
             GITHUB_USERNAME
             USER_AGENT
         env:
-          GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.PAC_TOKEN }}
           GRAPHQL_ENDPOINT: https://api.github.com/graphql
-          GITHUB_USERNAME: maemreyo
+          GITHUB_USERNAME: ${{ secrets.GH_USERNAME }}
           USER_AGENT: PostmanRuntime/7.29.2
