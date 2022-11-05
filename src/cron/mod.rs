@@ -18,8 +18,8 @@ pub(crate) async fn run_cron(mut sched: JobScheduler) -> Result<()> {
         })
     }));
 
-    // let mut job = Job::new_async("0 0 14 ? * * *", |uuid, mut l| {
-    let mut job = Job::new_async("0 0/2 * ? * * *", |uuid, mut l| {
+    let mut job = Job::new_async("0 0 14 ? * * *", |uuid, mut l| {
+        // let mut job = Job::new_async("0 0/2 * ? * * *", |uuid, mut l| {
         Box::pin(async move {
             println!("I run async, id {:?}", uuid);
 
