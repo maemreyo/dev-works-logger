@@ -32,6 +32,7 @@ Should follow:
   - [ ] How to contribute?
   - [ ] Recheck Dockerfile.chef?
   - [ ] Recheck Dockerfile.debian?
+  - [ ] Write the Makefile?
 - [x] Write REQUIREMENTS
 - [x] Manage env variables with `dotenv`
 - [x] Learn how to fetch data from GraphQL Github with gql_client
