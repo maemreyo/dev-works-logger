@@ -33,6 +33,9 @@ Should follow:
   - [ ] Recheck Dockerfile.chef?
   - [ ] Recheck Dockerfile.debian?
   - [ ] Write the Makefile?
+    - [ ] Welcome new comers
+    - [ ] Set Git hooks dir
+    - [ ] Install cocogitto tools for standardizing commits
 - [x] Write REQUIREMENTS
 - [x] Manage env variables with `dotenv`
 - [x] Learn how to fetch data from GraphQL Github with gql_client
@@ -66,6 +69,8 @@ Should follow:
   - [ ] Improve Docker Image
     - [ ] Cron job
     - [ ] ENV variables not found
+      - [ ] Find a way to get a github name, token on CI
+      - [ ] Pass env variables when building docker image on CI
   - [x] Deploy to Heroku
 
 ## How to run this project?
