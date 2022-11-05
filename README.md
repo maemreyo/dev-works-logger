@@ -32,8 +32,6 @@ Should follow:
 - [x] Write docs
   - [ ] How to run?
   - [ ] How to contribute?
-  - [ ] Recheck Dockerfile.chef?
-  - [ ] Recheck Dockerfile.debian?
   - [ ] Write the Makefile?
     - [ ] Welcome new comers
     - [ ] Set Git hooks dir
@@ -69,6 +67,7 @@ Should follow:
 - [x] Docker
   - [x] Build Docker Image
   - [ ] Improve Docker Image
+    - [x] Create a minimal docker image
     - [ ] Cron job
     - [ ] ENV variables not found
       - [ ] Find a way to get a github name, token on CI
