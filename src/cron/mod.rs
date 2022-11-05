@@ -1,7 +1,7 @@
 #![allow(unused)]
 use crate::gql_client::CustomizedGqlClient;
 use anyhow::Result;
-use log::{error, info, warn};
+// use log::{error, info, warn};
 use std::time::Duration;
 use tokio::time;
 use tokio_cron_scheduler::{Job, JobScheduler};
@@ -14,49 +14,48 @@ pub(crate) async fn run_cron(mut sched: JobScheduler) -> Result<()> {
 
     sched.set_shutdown_handler(Box::new(|| {
         Box::pin(async move {
-            info!("Shut down done");
+            println!("Shut down done");
         })
     }));
 
     // let mut job = Job::new_async("0 0 14 ? * * *", |uuid, mut l| {
-    let mut job =
-        Job::new_async("3 5,9,11,13,15 * ? * * *", |uuid, mut l| {
-            Box::pin(async move {
-                info!("I run async, id {:?}", uuid);
+    let mut job = Job::new_async("0 0/2 * ? * * *", |uuid, mut l| {
+        Box::pin(async move {
+            println!("I run async, id {:?}", uuid);
 
-                // Initialize GQL Client
-                let client = CustomizedGqlClient::new_client();
-                // Trigger action to get latest commits of repos
-                let result = Git::get_latest_commits(
-                    &client,
-                    &dotenv::var("GITHUB_USERNAME")
-                        .expect("Username not found"),
-                    Some(2),
-                    None,
-                )
-                .await
-                .unwrap();
-                info!("Response: {:?}", "OK");
+            // Initialize GQL Client
+            let client = CustomizedGqlClient::new_client();
+            // Trigger action to get latest commits of repos
+            let result = Git::get_latest_commits(
+                &client,
+                &dotenv::var("GITHUB_USERNAME")
+                    .expect("Username not found"),
+                Some(2),
+                None,
+            )
+            .await
+            .unwrap();
+            println!("Response: {:?}", "OK");
 
-                let next_tick = l.next_tick_for_job(uuid).await;
-                match next_tick {
-                    Ok(Some(ts)) => {
-                        info!("Next time is {:?}", ts)
-                    }
-                    _ => warn!("Could not get next tick for 59s job"),
+            let next_tick = l.next_tick_for_job(uuid).await;
+            match next_tick {
+                Ok(Some(ts)) => {
+                    println!("Next time is {:?}", ts)
                 }
-            })
+                _ => println!("Could not get next tick for 59s job"),
+            }
         })
-        .unwrap();
+    })
+    .unwrap();
 
     let job_clone = job.clone();
     let js = sched.clone();
-    info!("Job id {:?}", job.guid());
+    println!("Job id {:?}", job.guid());
     job.on_start_notification_add(&sched, Box::new(move |job_id, notification_id, type_of_notification| {
         let job_clone = job_clone.clone();
         let js = js.clone();
         Box::pin(async move {
-            info!("Job {:?} ran on start notification {:?} ({:?})", job_id, notification_id, type_of_notification);
+            println!("Job {:?} ran on start notification {:?} ({:?})", job_id, notification_id, type_of_notification);
         })
     })).await?;
 
@@ -65,7 +64,7 @@ pub(crate) async fn run_cron(mut sched: JobScheduler) -> Result<()> {
             &sched,
             Box::new(|job_id, notification_id, type_of_notification| {
                 Box::pin(async move {
-                    info!(
+                    println!(
                         "Job {:?} completed and ran notification {:?} ({:?})",
                         job_id, notification_id, type_of_notification
                     );
@@ -79,7 +78,7 @@ pub(crate) async fn run_cron(mut sched: JobScheduler) -> Result<()> {
 
     let start = sched.start().await;
     if start.is_err() {
-        error!("Error starting scheduler");
+        println!("Error starting scheduler");
         return Ok(());
     }
 

@@ -1,23 +1,40 @@
-# Rust as the base image
-FROM rust:1.65
+# STAGE 1: Generate a recipe file for dependencies
+FROM rust:1.65 as planner
 
-# 1. Create a new empty shell project
-RUN USER=root cargo new --bin git-stats-bot
-WORKDIR /git-stats-bot
+WORKDIR /app
+RUN cargo install cargo-chef
+COPY . .
+RUN cargo chef prepare --recipe-path recipe.json
 
-# 2. Copy our manifests
-COPY ./Cargo.lock ./Cargo.lock
-COPY ./Cargo.toml ./Cargo.toml
+# STAGE 2: Build our dependencies
+FROM rust:1.65 as cacher
 
-# 3. Build only the dependencies to cache them
+WORKDIR /app
+RUN cargo install cargo-chef
+COPY --from=planner /app/recipe.json recipe.json
+RUN cargo chef cook --release --recipe-path recipe.json
+
+# STAGE 3: Use the main official rust docker image as our build
+FROM rust:1.65 as builder
+
+# Copy the app into the docker image
+COPY . /app
+# Set the work directory
+WORKDIR /app
+
+# Copy dependencies
+COPY --from=cacher /app/target target
+COPY --from=cacher /usr/local/cargo /usr/local/cargo
+
+# Build the app
 RUN cargo build --release
-RUN rm src/*.rs
 
-# 4. Now that the dependency is built, copy your source code
-COPY ./src ./src
+# Use google distroless as runtime image
+FROM gcr.io/distroless/cc-debian11
 
-# 5. Build for release.
-RUN rm ./target/release/git-stats-bot*
-RUN cargo install --path .
+# Copy app from builder
+COPY --from=builder /app/target/release/git-stats-bot /app/git-stats-bot
+WORKDIR /app
 
-CMD ["git-stats-bot"]
+# Start the application
+CMD [ "./git-stats-bot" ]

@@ -29,6 +29,15 @@ Should follow:
 - Add more things like most amount of issues, most amount of reviews and so on.
 ---
 ## What did I do?
+- [x] Write docs
+  - [ ] How to run?
+  - [ ] How to contribute?
+  - [ ] Recheck Dockerfile.chef?
+  - [ ] Recheck Dockerfile.debian?
+  - [ ] Write the Makefile?
+    - [ ] Welcome new comers
+    - [ ] Set Git hooks dir
+    - [ ] Install cocogitto tools for standardizing commits
 - [x] Write REQUIREMENTS
 - [x] Manage env variables with `dotenv`
 - [x] Learn how to fetch data from GraphQL Github with gql_client
@@ -49,11 +58,22 @@ Should follow:
 - [ ] Discord
   - [x] Enable Github Webhook for Discord
   - [ ] Discord Bot
-- [ ] (Optional) Research CI/CD on Github Action
-- [x] Cronjob or Github Action?
+- [x] Research CI/CD on Github Action
+  - [x] Add script to check Rust before merging PRs
+  - [x] Add script to deploy Docker Image to Heroku
+  - [ ] Improve Deploy script
+    - [ ] Divide the whole script into pieces
+    - [ ] Remove some parts being not used
+- [x] Cronjob
   - [x] Cronjob
-  - [ ] Github Action?
-- [ ] Docker? (No ideas)
+- [x] Docker
+  - [x] Build Docker Image
+  - [ ] Improve Docker Image
+    - [ ] Cron job
+    - [ ] ENV variables not found
+      - [ ] Find a way to get a github name, token on CI
+      - [ ] Pass env variables when building docker image on CI
+  - [x] Deploy to Heroku
 
 ## How to run this project?
 
