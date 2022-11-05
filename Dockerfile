@@ -37,4 +37,4 @@ COPY --from=builder /app/target/release/git-stats-bot /app/git-stats-bot
 WORKDIR /app
 
 # Start the application
-CMD [ "./git-stats-bot" ]
+ENTRYPOINT [ "./git-stats-bot" ]
