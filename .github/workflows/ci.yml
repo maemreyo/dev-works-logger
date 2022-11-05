@@ -16,6 +16,7 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           usedocker: true
+          docker_heroku_process_type: worker
           docker_build_args: |
             GITHUB_PERSONAL_ACCESS_TOKEN
             GRAPHQL_ENDPOINT
