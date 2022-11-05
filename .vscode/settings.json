@@ -1,5 +1,6 @@
 {
 	"cSpell.words": [
+		"akhileshns",
 		"chrono",
 		"clippy",
 		"cocogitto",
@@ -13,7 +14,8 @@
 		"rustc",
 		"rustfmt",
 		"rustup",
-		"sched"
+		"sched",
+		"usedocker"
 	],
 	"files.exclude": {
 		"**/.git": true
