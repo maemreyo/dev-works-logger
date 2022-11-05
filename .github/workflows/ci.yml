@@ -22,7 +22,7 @@ jobs:
             GITHUB_USERNAME
             USER_AGENT
         env:
-          GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.PAC_TOKEN }}
-          GRAPHQL_ENDPOINT: https://api.github.com/graphql
-          GITHUB_USERNAME: ${{ secrets.GH_USERNAME }}
-          USER_AGENT: PostmanRuntime/7.29.2
+          HD_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.PAC_TOKEN }}
+          HD_GRAPHQL_ENDPOINT: https://api.github.com/graphql
+          HD_GITHUB_USERNAME: ${{ secrets.GH_USERNAME }}
+          HD_USER_AGENT: PostmanRuntime/7.29.2
