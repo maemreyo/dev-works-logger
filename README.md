@@ -59,20 +59,42 @@ Should follow:
 - [x] Research CI/CD on Github Action
   - [x] Add script to check Rust before merging PRs
   - [x] Add script to deploy Docker Image to Heroku
-  - [ ] Improve Deploy script
-    - [ ] Divide the whole script into pieces
-    - [ ] Remove some parts being not used
+  - [x] Improve Deploy script
+    - [x] Divide the whole script into pieces
+    - [x] Remove some parts being not used
 - [x] Cronjob
   - [x] Cronjob
 - [x] Docker
   - [x] Build Docker Image
-  - [ ] Improve Docker Image
+  - [x] Improve Docker Image
     - [x] Create a minimal docker image
-    - [ ] Cron job
-    - [ ] ENV variables not found
-      - [ ] Find a way to get a github name, token on CI
-      - [ ] Pass env variables when building docker image on CI
+    - [x] Cron job
+    - [x] ENV variables not found
+      - [x] Find a way to get a github name, token on CI
+      - [x] Pass env variables when building docker image on CI
   - [x] Deploy to Heroku
+  - [x] Plan to deploy to another server (Heroku is not free from ***28/11***)
+    - [x] Docker (Auto build: 5$ per month)
+    - [x] GCS
+    - [x] Localhost is the best choice for now, until I can find the alt.
+  - [ ] Send Email SMTP
+    - [ ] Investigate
+  - [ ] Implement CLI to trigger some features
+    - [ ] Overall configurations
+      - [ ] Github
+        - [ ] PAC
+        - [ ] Username
+      - [ ] 
+    - [ ] Twitter commands
+      - [ ] Config Twitter credentials
+      - [ ] Switch ON/OFF feature
+    - [ ] Email commands
+      - [ ] Config Gmail credentials
+        - [ ] `username`, `password`
+      - [ ] Switch ON/OFF feature
+    - [ ] Discord commands
+      - [ ] Config Discord credentials
+      - [ ] Switch ON/OFF feature
 
 ## How to run this project?
 
