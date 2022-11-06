@@ -1,6 +1,6 @@
-# git-stats-bot
-[![CI](https://github.com/maemreyo/git-stats-bot/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/maemreyo/git-stats-bot/actions/workflows/ci.yml)
-[![Rust](https://github.com/maemreyo/git-stats-bot/actions/workflows/rust.yml/badge.svg)](https://github.com/maemreyo/git-stats-bot/actions/workflows/rust.yml)
+# dev-works-logger
+[![CI](https://github.com/maemreyo/dev-works-logger/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/maemreyo/dev-works-logger/actions/workflows/ci.yml)
+[![Rust](https://github.com/maemreyo/dev-works-logger/actions/workflows/rust.yml/badge.svg)](https://github.com/maemreyo/dev-works-logger/actions/workflows/rust.yml)
 Build a bot to collect data from Git
 
 ## What are we trying to build?
@@ -38,7 +38,8 @@ Should follow:
     - [ ] Set Git hooks dir
     - [ ] Install cocogitto tools for standardizing commits
 - [x] Write REQUIREMENTS
-- [ ] Change the project name from `git-stats-bot` to `dev-works-logger`
+- [x] Change the project name 
+  - [x] From `git-stats-bot` to `dev-works-logger`
 - [x] Refactor folder structure
     +-- main.rs
     +-- modules
