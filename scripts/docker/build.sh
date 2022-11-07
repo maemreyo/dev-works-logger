@@ -1,5 +1,6 @@
 #!/bin/bash
 COLOR_ROOT_DIR=./scripts/utils
+New Line with awk
 source $(dirname "$COLOR_ROOT_DIR")/utils/colors.sh
 
 ############################################################
@@ -26,6 +27,8 @@ Help()
 ############################################################
 
 # Set variables
+iname=maemreyo/devlogger
+tag=latest
 
 ############################################################
 # Process the input options. Add options as needed.        #
@@ -48,16 +51,8 @@ done
 
 COMMAND="docker build -t $iname:$tag ."
 
-# Check if no args are provided
-if [ $# -eq 0 ];
-then
-  echo "$0: Missing arguments"
-  exit 1
-fi
-
 echo "${info}Build an docker image with a name: ${command}$iname${rs} ${info}and a tag: ${command}$tag${rs}${info}?${rs}"
 echo "Answer y/n: "
-
 
 read REPLY
 if [[ $REPLY == "y" ]]; 

@@ -28,7 +28,8 @@ Help()
 ############################################################
 
 # Set variables
-# iname = "maemreyo/devlogger"
+iname=maemreyo/devlogger
+cname=devlogger
 
 ############################################################
 # Process the input options. Add options as needed.        #
@@ -52,14 +53,7 @@ done
 
 COMMAND="docker run --env-file .env -it -d --rm --name=${cname} ${iname}"
 
-# Check if no args are provided
-if [ $# -eq 0 ];
-then
-  echo "$0: Missing arguments"
-  exit 1
-fi
-
-echo "${info}Run a container named ${command}$cname${rs} with image: ${command}$iname${rs}"
+echo "${info}Run a container named ${command}$cname${rs} ${info}with image:${rs} ${command}$iname${rs}"
 echo "Answer y/n: "
 
 read REPLY
