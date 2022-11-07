@@ -41,23 +41,23 @@ Should follow:
 - [x] Change the project name 
   - [x] From `git-stats-bot` to `dev-works-logger`
 - [x] Refactor folder structure
-    +-- main.rs
-    +-- modules
-    +---- git
-    +------ mod.rs
-    +------ models
-    +-------- mod.rs
-    +-------- module1.rs
-    +-------- module2.rs
-    +---- discord
-    +------ mod.rs
-    +------ models
-    +-------- mod.rs
-    +-------- module1.rs
-    +-------- module2.rs
-    +-- utils
-    +---- init
-    +------ mod.rs
+  - [x] +-- main.rs
+  - [x] +-- modules
+  - [x] +---- git
+  - [x] +------ mod.rs
+  - [x] +------ models
+  - [x] +-------- mod.rs
+  - [x] +-------- module1.rs
+  - [x] +-------- module2.rs
+  - [x] +---- discord
+  - [x] +------ mod.rs
+  - [x] +------ models
+  - [x] +-------- mod.rs
+  - [x] +-------- module1.rs
+  - [x] +-------- module2.rs
+  - [x] +-- utils
+  - [x] +---- init
+  - [x] +------ mod.rs
 ### Developments
 - [x] Manage env variables with `dotenv`
 - [x] Fetch data from GraphQL Github with gql_client
@@ -68,6 +68,9 @@ Should follow:
   - [ ] Create my own request client
 - [x] Research about Git hooks
 - [ ] Twitter API
+  - [x] Auth
+  - [x] Create a tweet
+  - [ ] Determine a template for tweet
 - [ ] Discord
   - [x] Enable Github Webhook for Discord
   - [ ] Discord Bot
