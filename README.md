@@ -83,6 +83,7 @@ Should follow:
 - [x] Docker
   - [x] Build Docker Image
   - [ ] Research `docker-compose`
+    - [ ] Build a docker image to develop locally
   - [x] Improve Docker Image
     - [x] Create a minimal docker image
     - [x] Cron job
@@ -113,15 +114,15 @@ Should follow:
     - [ ] Config Discord credentials
     - [ ] Switch ON/OFF feature
 - [ ] Add scripts to cut down the time to deal with some dev parts
-  - [ ] Docker
-    - [ ] Build image
-    - [ ] Run image
-    - [ ] Exec image
+  - [x] Docker
+    - [x] Build image
+    - [x] Run image
+    - [x] Exec image
     - [ ] Push image to Docker Hub
   - [ ] Release
     - [ ] Changelog generator
-  - [ ] Development
-    - [ ] Run debug
+  - [x] Development
+    - [x] Run debug
 
 
 ## How to run this project?
