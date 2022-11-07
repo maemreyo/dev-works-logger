@@ -1,7 +1,7 @@
 #!/bin/bash
 COLOR_ROOT_DIR=./scripts/utils
-New Line with awk
 source $(dirname "$COLOR_ROOT_DIR")/utils/colors.sh
+source $(dirname "$0")/vars.sh
 
 ############################################################
 # Help                                                     #
@@ -14,8 +14,8 @@ Help()
    echo
    echo "Syntax: docker build [-t|n|h]"
    echo "options:"
-   echo "\tn     Build a docker image with this name (if not enter, the default value is maemreyo/devlogger)"
-   echo "\tt     Build a docker image with this tag"
+   echo "\tn     Build a docker image with a name"
+   echo "\tt     Build a docker image with a tag"
    echo "\th     Print this guide"
    echo
 }
@@ -25,10 +25,6 @@ Help()
 # Main program                                             #
 ############################################################
 ############################################################
-
-# Set variables
-iname=maemreyo/devlogger
-tag=latest
 
 ############################################################
 # Process the input options. Add options as needed.        #
@@ -44,7 +40,7 @@ while getopts ":ht:n:" option; do
       t) # Enter a tag
          tag=$OPTARG;;
      \?) # Invalid option
-         echo "Error: Invalid option"
+         echo "${error}Error: Invalid option${rs}"
          exit;;
    esac
 done
@@ -52,7 +48,7 @@ done
 COMMAND="docker build -t $iname:$tag ."
 
 echo "${info}Build an docker image with a name: ${command}$iname${rs} ${info}and a tag: ${command}$tag${rs}${info}?${rs}"
-echo "Answer y/n: "
+echo "${info}Confirm? (y/n):${rs}"
 
 read REPLY
 if [[ $REPLY == "y" ]]; 
