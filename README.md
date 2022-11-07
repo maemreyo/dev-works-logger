@@ -1,6 +1,6 @@
-# git-stats-bot
-[![CI](https://github.com/maemreyo/git-stats-bot/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/maemreyo/git-stats-bot/actions/workflows/ci.yml)
-[![Rust](https://github.com/maemreyo/git-stats-bot/actions/workflows/rust.yml/badge.svg)](https://github.com/maemreyo/git-stats-bot/actions/workflows/rust.yml)
+# dev-works-logger
+[![CI](https://github.com/maemreyo/dev-works-logger/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/maemreyo/dev-works-logger/actions/workflows/ci.yml)
+[![Rust](https://github.com/maemreyo/dev-works-logger/actions/workflows/rust.yml/badge.svg)](https://github.com/maemreyo/dev-works-logger/actions/workflows/rust.yml)
 Build a bot to collect data from Git
 
 ## What are we trying to build?
@@ -29,6 +29,7 @@ Should follow:
 - Add more things like most amount of issues, most amount of reviews and so on.
 ---
 ## What did I do?
+### Utils
 - [x] Write docs
   - [ ] How to run?
   - [ ] How to contribute?
@@ -37,20 +38,34 @@ Should follow:
     - [ ] Set Git hooks dir
     - [ ] Install cocogitto tools for standardizing commits
 - [x] Write REQUIREMENTS
+- [x] Change the project name 
+  - [x] From `git-stats-bot` to `dev-works-logger`
+- [x] Refactor folder structure
+    +-- main.rs
+    +-- modules
+    +---- git
+    +------ mod.rs
+    +------ models
+    +-------- mod.rs
+    +-------- module1.rs
+    +-------- module2.rs
+    +---- discord
+    +------ mod.rs
+    +------ models
+    +-------- mod.rs
+    +-------- module1.rs
+    +-------- module2.rs
+    +-- utils
+    +---- init
+    +------ mod.rs
+### Developments
 - [x] Manage env variables with `dotenv`
-- [x] Learn how to fetch data from GraphQL Github with gql_client
-- [x] Create a function to get all the recent commit in a repo
-- [x] Research GraphQL to get the recent commit over all repos
+- [x] Fetch data from GraphQL Github with gql_client
+- [x] Research GraphQL 
+  - [x] Get all recent commits of a repo
+  - [x] Get all recent active repos
 - [ ] Refactor: instead of using gql_client, I plan to change it to reqwest with json body
   - [ ] Create my own request client
-- [x] Refactor folder structure
-  - [x] +-- main.rs
-  - [x] +-- git
-  - [x] +---- models
-  - [x] +------ mod.rs
-  - [x] +------ module1.rs
-  - [x] +------ module2.rs
-  - [x] +---- mod.rs
 - [x] Research about Git hooks
 - [ ] Twitter API
 - [ ] Discord
@@ -59,20 +74,46 @@ Should follow:
 - [x] Research CI/CD on Github Action
   - [x] Add script to check Rust before merging PRs
   - [x] Add script to deploy Docker Image to Heroku
-  - [ ] Improve Deploy script
-    - [ ] Divide the whole script into pieces
-    - [ ] Remove some parts being not used
+  - [x] Improve Deploy script
+    - [x] Divide the whole script into pieces
+    - [x] Remove some parts being not used
+  - [ ] ***Disable CI for now, I plan to do drive the project with another direction.***
 - [x] Cronjob
   - [x] Cronjob
 - [x] Docker
   - [x] Build Docker Image
-  - [ ] Improve Docker Image
+  - [ ] Research `docker-compose`
+  - [x] Improve Docker Image
     - [x] Create a minimal docker image
-    - [ ] Cron job
-    - [ ] ENV variables not found
-      - [ ] Find a way to get a github name, token on CI
-      - [ ] Pass env variables when building docker image on CI
-  - [x] Deploy to Heroku
+    - [x] Cron job
+    - [x] ENV variables not found
+      - [x] Find a way to get a github name, token on CI
+      - [x] Pass env variables when building docker image on CI
+- [x] Deploy to Heroku
+- [x] Plan to deploy to another server (Heroku is not free from ***28/11***)
+    - [x] Docker (Auto build: 5$ per month)
+    - [x] GCS
+    - [x] ***Localhost is the best choice for now, until I can find the alt.***
+- [ ] Send Email SMTP
+  - [ ] Investigate
+- [ ] Implement CLI to trigger some features
+  - [ ] Overall configurations
+    - [ ] Github
+      - [ ] PAC
+      - [ ] Username
+    - [ ] 
+  - [ ] Twitter commands
+    - [ ] Config Twitter credentials
+    - [ ] Switch ON/OFF feature
+  - [ ] Email commands
+    - [ ] Config Gmail credentials
+      - [ ] `username`, `password`
+    - [ ] Switch ON/OFF feature
+  - [ ] Discord commands
+    - [ ] Config Discord credentials
+    - [ ] Switch ON/OFF feature
+- [ ] Add scripts to cut down the time to deal with some dev parts
+
 
 ## How to run this project?
 

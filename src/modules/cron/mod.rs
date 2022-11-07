@@ -1,12 +1,10 @@
 #![allow(unused)]
-use crate::gql_client::CustomizedGqlClient;
+use crate::modules::git::Git;
+use crate::modules::gql_client::CustomizedGqlClient;
 use anyhow::Result;
-// use log::{error, info, warn};
 use std::time::Duration;
 use tokio::time;
 use tokio_cron_scheduler::{Job, JobScheduler};
-
-use crate::git::Git;
 
 pub(crate) async fn run_cron(mut sched: JobScheduler) -> Result<()> {
     #[cfg(feature = "signal")]

@@ -33,8 +33,8 @@ RUN cargo build --release
 FROM gcr.io/distroless/cc-debian11
 
 # Copy app from builder
-COPY --from=builder /app/target/release/git-stats-bot /app/git-stats-bot
+COPY --from=builder /app/target/release/dev-works-logger /app/dev-works-logger
 WORKDIR /app
 
 # Start the application
-CMD [ "./git-stats-bot" ]
+CMD [ "./dev-works-logger" ]

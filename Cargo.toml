@@ -1,9 +1,9 @@
 [package]
-name = "git-stats-bot"
+name = "dev-works-logger"
 version = "0.1.0"
 edition = "2021"
 readme = "README.md"
-repository = "https://github.com/maemreyo/git-stats-bot"
+repository = "https://github.com/maemreyo/dev-works-logger"
 description = """
 A bot to collect data from Git
 """
