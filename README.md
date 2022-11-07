@@ -77,7 +77,7 @@ Should follow:
   - [x] Improve Deploy script
     - [x] Divide the whole script into pieces
     - [x] Remove some parts being not used
-  - [ ] ***Disable CI for now, I plan to do drive the project with another direction.***
+  - [x] ***Disable CI for now, I plan to do drive the project with another direction.***
 - [x] Cronjob
   - [x] Cronjob
 - [x] Docker
