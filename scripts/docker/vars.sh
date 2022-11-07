@@ -1,0 +1,3 @@
+iname=template_docker_image_name
+cname=devlogger
+tag=latest

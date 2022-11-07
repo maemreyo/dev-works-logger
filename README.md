@@ -113,6 +113,15 @@ Should follow:
     - [ ] Config Discord credentials
     - [ ] Switch ON/OFF feature
 - [ ] Add scripts to cut down the time to deal with some dev parts
+  - [ ] Docker
+    - [ ] Build image
+    - [ ] Run image
+    - [ ] Exec image
+    - [ ] Push image to Docker Hub
+  - [ ] Release
+    - [ ] Changelog generator
+  - [ ] Development
+    - [ ] Run debug
 
 
 ## How to run this project?
