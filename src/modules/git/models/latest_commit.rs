@@ -126,7 +126,7 @@ pub struct Edge {
 #[serde(rename_all = "camelCase")]
 pub struct Node {
     pub oid: String,
-    pub message: String,
+    pub message_headline: String,
     pub author: Author,
     pub commit_url: String,
     pub committed_date: String,

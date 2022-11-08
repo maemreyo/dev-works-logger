@@ -1,4 +1,6 @@
 pub mod content_generator;
+pub mod map;
+pub mod mock;
 
 use egg_mode;
 use std;

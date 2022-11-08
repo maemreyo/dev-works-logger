@@ -1,15 +1,63 @@
-pub fn template() -> String {
-    String::from(
-        r#"
-Day 11 🤖🤖🤖
-I've spent most of my day to dig into `shell script`.
-And with a last few hours of the day, I received a approval email from Twitter related to my developer account.
-I can't wait till tomorrow morning to try some interesting thing ⏳🙆‍♂️
-👉 Here is my repo: https://github.com/maemreyo/dev-works-logger
-#100DaysOfCode #Rust
-"#,
+use super::{map::map_changed_file, mock::titles};
+use crate::modules::git::utils::Branch;
+use crate::modules::git::Commit;
+use crate::modules::git::Repo;
+use log::info;
+use std::io::Cursor;
+use std::path::Path;
+use rusttype::Font;
+use rusttype::Scale;
+use std::fs;
+use std::include_bytes;
+use std::io;
+use std::str;
+
+
+pub fn tweet_generator(
+    data: (Vec<Commit>, Repo),
+    branch: String,
+) -> String {
+    let commits = data.0;
+    let repo = data.1;
+    let title = title(&commits);
+    let git_stats = git_stats(&commits, branch);
+    let current_working_on = current_working_on(repo);
+    let tags = tags();
+    format!(
+        "{}\n{}\n{}\n{}",
+        title, git_stats, current_working_on, tags
     )
 }
 
-// This project is based on Rust, it's to help users to collect their data from Github (with GraphQL Github) and forward them to Twitter, Discord, Email (scheduled).
-// My project is at very first day of development, so if anyone's interested about it, feel free to open issues, create PRs to contribute 💌
+pub fn title(commits: &Vec<Commit>) -> String {
+    let mut total_changed_file: u64 = 0;
+
+    for commit in commits {
+        total_changed_file += commit.changed_files;
+    }
+
+    let level = map_changed_file(total_changed_file);
+    titles().get(&level).unwrap().to_string()
+}
+
+pub fn git_stats(commits: &Vec<Commit>, branch: String) -> String {
+    let number_commits = commits.len();
+    let changed_files = changed_files(commits);
+    format!("{} commits created and total {} files changed on {} branch 👏👏", number_commits, changed_files, branch)
+}
+
+pub fn changed_files(commits: &Vec<Commit>) -> u64 {
+    let mut files = 0;
+    for commit in commits {
+        files += commit.changed_files;
+    }
+    files
+}
+
+pub fn current_working_on(repo: Repo) -> String {
+    format!("👉 My repo: {}\nIf anyone's interested, feel free to open issues, create PRs to contribute 💌", repo.url)
+}
+
+pub fn tags() -> String {
+    format!("#100DaysOfCode #rust")
+}

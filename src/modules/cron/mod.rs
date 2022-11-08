@@ -1,8 +1,12 @@
 #![allow(unused)]
-use crate::modules::git::Git;
 use crate::modules::gql_client::CustomizedGqlClient;
+use crate::modules::twitter::common::content_generator;
+use crate::modules::twitter::Twitter;
+use crate::modules::{self, git::Git};
 use anyhow::Result;
-use std::time::Duration;
+use chrono::{DateTime, Datelike, Duration, TimeZone, Utc};
+use log::info;
+use std::time::Duration as StdDuration;
 use tokio::time;
 use tokio_cron_scheduler::{Job, JobScheduler};
 
@@ -16,24 +20,47 @@ pub(crate) async fn run_cron(mut sched: JobScheduler) -> Result<()> {
         })
     }));
 
-    let mut job = Job::new_async("0 0 14 ? * * *", |uuid, mut l| {
+    let mut job = Job::new_async("0 0 16 ? * * *", |uuid, mut l| {
         // let mut job = Job::new_async("0 0/2 * ? * * *", |uuid, mut l| {
         Box::pin(async move {
             println!("I run async, id {:?}", uuid);
 
+            // Count time
+            let today = Utc::now();
+            let _since = Utc
+                .ymd(today.year(), today.month(), today.day())
+                .and_hms(0, 0, 1);
+            let since =
+                format!("{}", _since.format("%Y-%m-%dT%H:%M:%SZ"));
+            let _until = Utc
+                .ymd(today.year(), today.month(), today.day())
+                .and_hms(23, 59, 59);
+            let until =
+                format!("{}", _until.format("%Y-%m-%dT%H:%M:%SZ"));
+
             // Initialize GQL Client
-            let client = CustomizedGqlClient::new_client();
-            // Trigger action to get latest commits of repos
-            let result = Git::get_latest_commits(
+            let client =
+                modules::gql_client::CustomizedGqlClient::new_client(
+                );
+
+            let result = modules::git::Git::get_commits_in_a_time(
                 &client,
+                "dev-works-logger",
                 &dotenv::var("GITHUB_USERNAME")
                     .expect("Username not found"),
-                Some(2),
-                None,
+                "dev",
+                &since,
+                &until,
             )
             .await
             .unwrap();
-            println!("Response: {:?}", "OK");
+
+            let tweet_content = content_generator::tweet_generator(
+                result,
+                "dev".to_string(),
+            );
+            info!("tweet_content: {:?}", tweet_content);
+            Twitter::new_tweet(tweet_content).await.unwrap();
 
             let next_tick = l.next_tick_for_job(uuid).await;
             match next_tick {
@@ -82,7 +109,7 @@ pub(crate) async fn run_cron(mut sched: JobScheduler) -> Result<()> {
 
     loop {
         sched.tick();
-        time::sleep(Duration::from_millis(1000));
+        time::sleep(StdDuration::from_millis(1000));
     }
 
     Ok(())

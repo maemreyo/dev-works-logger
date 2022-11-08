@@ -71,16 +71,12 @@ Should follow:
   - [x] Auth
   - [x] Create a tweet
   - [ ] Determine a template for tweet
-    - [ ] Title (depends on the number of CHANGED FILE to generate)
-    - [ ] An Image
-    - [ ] Tags
-      - [ ] Create a generator (#tagname)
+    - [x] Title (depends on the number of CHANGED FILE to generate)
+    - [x] Body
+      - [x] Total commits in the day, total changed files
+    - [x] Tags
     - [ ] Create a function to check the tweet's length before tweeting
   - [ ] Send an email related to the tweet's status (false/true)
-- [ ] Generate an image about what I did in the day ***(Due to Twitter can only tweet a post up to 280 characters, so we plan to upload an image instead)***
-  - [ ] Generate an image
-    - [ ] Number of commits (commit id, commit message, changed file)
-    - [ ] How to display? (List or chart)
 - [ ] Discord
   - [x] Enable Github Webhook for Discord
   - [ ] Discord Bot
