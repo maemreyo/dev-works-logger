@@ -71,6 +71,16 @@ Should follow:
   - [x] Auth
   - [x] Create a tweet
   - [ ] Determine a template for tweet
+    - [ ] Title (depends on the number of CHANGED FILE to generate)
+    - [ ] An Image
+    - [ ] Tags
+      - [ ] Create a generator (#tagname)
+    - [ ] Create a function to check the tweet's length before tweeting
+  - [ ] Send an email related to the tweet's status (false/true)
+- [ ] Generate an image about what I did in the day ***(Due to Twitter can only tweet a post up to 280 characters, so we plan to upload an image instead)***
+  - [ ] Generate an image
+    - [ ] Number of commits (commit id, commit message, changed file)
+    - [ ] How to display? (List or chart)
 - [ ] Discord
   - [x] Enable Github Webhook for Discord
   - [ ] Discord Bot
@@ -126,8 +136,11 @@ Should follow:
     - [ ] Changelog generator
   - [x] Development
     - [x] Run debug
-
-
+- [ ] Actix web impl (In a long-term)
+  - [ ] Restructure folder
+    - [ ] Monorepo
+    - [ ] `docker-compose` for building all services
+- [ ] Database impl (MongoDB) (In a long-term)
 ## How to run this project?
 
 ### Install
