@@ -205,7 +205,7 @@ impl Git {
                 changed_files: edge.node.changed_files,
             })
         }
-        let repo_detail = response.repository.clone();
+        let repo_detail = response.repository;
         let repo = Repo {
             name: repo_detail.name,
             description: repo_detail.description,

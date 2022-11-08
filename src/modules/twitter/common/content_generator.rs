@@ -3,15 +3,14 @@ use crate::modules::git::utils::Branch;
 use crate::modules::git::Commit;
 use crate::modules::git::Repo;
 use log::info;
-use std::io::Cursor;
-use std::path::Path;
 use rusttype::Font;
 use rusttype::Scale;
 use std::fs;
 use std::include_bytes;
 use std::io;
+use std::io::Cursor;
+use std::path::Path;
 use std::str;
-
 
 pub fn tweet_generator(
     data: (Vec<Commit>, Repo),
@@ -59,5 +58,5 @@ pub fn current_working_on(repo: Repo) -> String {
 }
 
 pub fn tags() -> String {
-    format!("#100DaysOfCode #rust")
+    "#100DaysOfCode #rust".to_string()
 }
