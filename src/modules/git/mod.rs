@@ -1,12 +1,14 @@
 #![allow(unused)]
 pub mod models;
+pub mod utils;
 use anyhow::Result;
 use gql_client::Client;
 use log::{debug, info};
 
+use self::models::commits_in_a_time::Data as CommitsByTimeDataModel;
 use self::models::latest_commit::Data as LatestCommitDataModel;
 use self::models::query::{
-    LatestCommitVars, Query, RecentCommitVars,
+    CommitsByTimeVars, LatestCommitVars, Query, RecentCommitVars,
 };
 use self::models::recent_active_repos::Data as RecentActiveReposDataModel;
 
@@ -21,17 +23,17 @@ pub struct Git;
 #[derive(Debug)]
 pub struct Commit {
     author: String,
-    message: String,
-    commit_url: String,
-    committed_date: String,
-    changed_files: u64,
+    pub message_headline: String,
+    pub commit_url: String,
+    pub committed_date: String,
+    pub changed_files: u64,
 }
 
 #[derive(Debug)]
 pub struct Repo {
-    name: String,
-    description: String,
-    url: String,
+    pub name: String,
+    pub description: String,
+    pub url: String,
 }
 
 #[derive(Debug)]
@@ -82,7 +84,7 @@ impl Git {
             let data = &edge.node;
             commits.push(Commit {
                 author: data.author.name.to_owned(),
-                message: data.message.to_owned(),
+                message_headline: data.message_headline.to_owned(),
                 commit_url: data.commit_url.to_owned(),
                 committed_date: data.committed_date.to_owned(),
                 changed_files: data.changed_files,
@@ -166,5 +168,49 @@ impl Git {
             })
         }
         Ok(latest_commits)
+    }
+
+    pub async fn get_commits_in_a_time(
+        client: &Client,
+        repo: &str,
+        owner: &str,
+        branch: &str,
+        since: &str,
+        until: &str,
+    ) -> Result<(Vec<Commit>, Repo)> {
+        let mut commits: Vec<Commit> = vec![];
+
+        let query = Query::commits_in_a_day();
+        let vars = CommitsByTimeVars {
+            repo: repo.to_owned(),
+            owner: owner.to_owned(),
+            branch: branch.to_owned(),
+            since: since.to_owned(),
+            until: until.to_owned(),
+        };
+        let response = client
+          .query_with_vars_unwrap::<CommitsByTimeDataModel, CommitsByTimeVars>(
+              query.as_str(),
+              vars,
+          )
+          .await
+          .unwrap();
+
+        for edge in response.repository.object.history.edges.clone() {
+            commits.push(Commit {
+                author: edge.node.author.name,
+                message_headline: edge.node.message_headline,
+                commit_url: edge.node.url,
+                committed_date: edge.node.committed_date,
+                changed_files: edge.node.changed_files,
+            })
+        }
+        let repo_detail = response.repository;
+        let repo = Repo {
+            name: repo_detail.name,
+            description: repo_detail.description,
+            url: repo_detail.url,
+        };
+        Ok((commits, repo))
     }
 }

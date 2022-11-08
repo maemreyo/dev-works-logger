@@ -41,23 +41,23 @@ Should follow:
 - [x] Change the project name 
   - [x] From `git-stats-bot` to `dev-works-logger`
 - [x] Refactor folder structure
-    +-- main.rs
-    +-- modules
-    +---- git
-    +------ mod.rs
-    +------ models
-    +-------- mod.rs
-    +-------- module1.rs
-    +-------- module2.rs
-    +---- discord
-    +------ mod.rs
-    +------ models
-    +-------- mod.rs
-    +-------- module1.rs
-    +-------- module2.rs
-    +-- utils
-    +---- init
-    +------ mod.rs
+  - [x] +-- main.rs
+  - [x] +-- modules
+  - [x] +---- git
+  - [x] +------ mod.rs
+  - [x] +------ models
+  - [x] +-------- mod.rs
+  - [x] +-------- module1.rs
+  - [x] +-------- module2.rs
+  - [x] +---- discord
+  - [x] +------ mod.rs
+  - [x] +------ models
+  - [x] +-------- mod.rs
+  - [x] +-------- module1.rs
+  - [x] +-------- module2.rs
+  - [x] +-- utils
+  - [x] +---- init
+  - [x] +------ mod.rs
 ### Developments
 - [x] Manage env variables with `dotenv`
 - [x] Fetch data from GraphQL Github with gql_client
@@ -68,6 +68,15 @@ Should follow:
   - [ ] Create my own request client
 - [x] Research about Git hooks
 - [ ] Twitter API
+  - [x] Auth
+  - [x] Create a tweet
+  - [ ] Determine a template for tweet
+    - [x] Title (depends on the number of CHANGED FILE to generate)
+    - [x] Body
+      - [x] Total commits in the day, total changed files
+    - [x] Tags
+    - [ ] Create a function to check the tweet's length before tweeting
+  - [ ] Send an email related to the tweet's status (false/true)
 - [ ] Discord
   - [x] Enable Github Webhook for Discord
   - [ ] Discord Bot
@@ -83,6 +92,7 @@ Should follow:
 - [x] Docker
   - [x] Build Docker Image
   - [ ] Research `docker-compose`
+    - [ ] Build a docker image to develop locally
   - [x] Improve Docker Image
     - [x] Create a minimal docker image
     - [x] Cron job
@@ -113,17 +123,20 @@ Should follow:
     - [ ] Config Discord credentials
     - [ ] Switch ON/OFF feature
 - [ ] Add scripts to cut down the time to deal with some dev parts
-  - [ ] Docker
-    - [ ] Build image
-    - [ ] Run image
-    - [ ] Exec image
+  - [x] Docker
+    - [x] Build image
+    - [x] Run image
+    - [x] Exec image
     - [ ] Push image to Docker Hub
   - [ ] Release
     - [ ] Changelog generator
-  - [ ] Development
-    - [ ] Run debug
-
-
+  - [x] Development
+    - [x] Run debug
+- [ ] Actix web impl (In a long-term)
+  - [ ] Restructure folder
+    - [ ] Monorepo
+    - [ ] `docker-compose` for building all services
+- [ ] Database impl (MongoDB) (In a long-term)
 ## How to run this project?
 
 ### Install

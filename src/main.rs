@@ -1,9 +1,12 @@
+#![allow(unused)]
 mod modules;
 mod utils;
 
-use modules::cron::run_cron;
+use modules::{
+    cron::run_cron,
+    twitter::{common::content_generator, Twitter},
+};
 use utils::init::init;
-
 extern crate log;
 
 // use crate::cron::run_cron;

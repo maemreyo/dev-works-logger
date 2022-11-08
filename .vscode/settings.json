@@ -1,5 +1,6 @@
 {
 	"cSpell.words": [
+		"Actix",
 		"akhileshns",
 		"chrono",
 		"clippy",
@@ -9,12 +10,18 @@
 		"dotenv",
 		"fommat",
 		"hello",
+		"igen",
+		"imageops",
+		"imageproc",
+		"luma",
 		"maemreyo",
 		"reqwest",
 		"rustc",
 		"rustfmt",
+		"rusttype",
 		"rustup",
 		"sched",
+		"tagname",
 		"usedocker"
 	],
 	"files.exclude": {
