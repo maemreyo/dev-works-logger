@@ -1,5 +1,6 @@
 {
 	"cSpell.words": [
+		"Actix",
 		"akhileshns",
 		"chrono",
 		"clippy",
@@ -15,6 +16,7 @@
 		"rustfmt",
 		"rustup",
 		"sched",
+		"tagname",
 		"usedocker"
 	],
 	"files.exclude": {
