@@ -5,9 +5,9 @@ use serde::{Deserialize, Serialize};
     Debug,
     Clone,
     PartialEq,
-    Eq,
     Serialize,
-    Deserialize
+    Deserialize,
+    Eq
 )]
 #[serde(rename_all = "camelCase")]
 pub struct Root {
@@ -19,9 +19,9 @@ pub struct Root {
     Debug,
     Clone,
     PartialEq,
-    Eq,
     Serialize,
-    Deserialize
+    Deserialize,
+    Eq
 )]
 #[serde(rename_all = "camelCase")]
 pub struct Data {
@@ -33,13 +33,16 @@ pub struct Data {
     Debug,
     Clone,
     PartialEq,
-    Eq,
     Serialize,
-    Deserialize
+    Deserialize,
+    Eq
 )]
 #[serde(rename_all = "camelCase")]
 pub struct Repository {
-    pub default_branch_ref: DefaultBranchRef,
+    pub object: Object,
+    pub url: String,
+    pub description: String,
+    pub name: String,
 }
 
 #[derive(
@@ -47,26 +50,12 @@ pub struct Repository {
     Debug,
     Clone,
     PartialEq,
-    Eq,
     Serialize,
-    Deserialize
+    Deserialize,
+    Eq
 )]
 #[serde(rename_all = "camelCase")]
-pub struct DefaultBranchRef {
-    pub target: Target,
-}
-
-#[derive(
-    Default,
-    Debug,
-    Clone,
-    PartialEq,
-    Eq,
-    Serialize,
-    Deserialize
-)]
-#[serde(rename_all = "camelCase")]
-pub struct Target {
+pub struct Object {
     pub history: History,
 }
 
@@ -75,14 +64,14 @@ pub struct Target {
     Debug,
     Clone,
     PartialEq,
-    Eq,
     Serialize,
-    Deserialize
+    Deserialize,
+    Eq
 )]
 #[serde(rename_all = "camelCase")]
 pub struct History {
-    pub page_info: PageInfo,
     pub edges: Vec<Edge>,
+    pub total_count: i64,
 }
 
 #[derive(
@@ -90,24 +79,9 @@ pub struct History {
     Debug,
     Clone,
     PartialEq,
-    Eq,
     Serialize,
-    Deserialize
-)]
-#[serde(rename_all = "camelCase")]
-pub struct PageInfo {
-    pub has_next_page: bool,
-    pub has_previous_page: bool,
-}
-
-#[derive(
-    Default,
-    Debug,
-    Clone,
-    PartialEq,
-    Eq,
-    Serialize,
-    Deserialize
+    Deserialize,
+    Eq
 )]
 #[serde(rename_all = "camelCase")]
 pub struct Edge {
@@ -119,18 +93,18 @@ pub struct Edge {
     Debug,
     Clone,
     PartialEq,
-    Eq,
     Serialize,
-    Deserialize
+    Deserialize,
+    Eq
 )]
 #[serde(rename_all = "camelCase")]
 pub struct Node {
-    pub oid: String,
-    pub message_headline: String,
     pub author: Author,
-    pub commit_url: String,
-    pub committed_date: String,
     pub changed_files: u64,
+    pub message_headline: String,
+    pub oid: String,
+    pub url: String,
+    pub committed_date: String,
 }
 
 #[derive(
@@ -138,14 +112,11 @@ pub struct Node {
     Debug,
     Clone,
     PartialEq,
-    Eq,
     Serialize,
-    Deserialize
+    Deserialize,
+    Eq
 )]
 #[serde(rename_all = "camelCase")]
 pub struct Author {
     pub name: String,
-    pub email: String,
-    pub date: String,
-    pub avatar_url: String,
 }

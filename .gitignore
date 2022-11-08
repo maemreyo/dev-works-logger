@@ -11,3 +11,4 @@ Cargo.lock
 
 .env
 **/**/*.sh.bk
+twitter_settings

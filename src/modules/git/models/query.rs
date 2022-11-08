@@ -15,6 +15,15 @@ pub struct RecentCommitVars {
     pub quantity: u16,
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+pub struct CommitsByTimeVars {
+    pub repo: String,
+    pub owner: String,
+    pub branch: String,
+    pub since: String,
+    pub until: String,
+}
+
 impl Query {
     pub fn latest_commit_by_repo() -> String {
         String::from(
@@ -31,7 +40,7 @@ impl Query {
 						  edges {
 							node {
 							  	oid
-								message
+                messageHeadline
 								commitUrl
 								committedDate
 								changedFiles
@@ -73,6 +82,39 @@ impl Query {
     			  avatarUrl
     			}
     		  }"#,
+        )
+    }
+    // "2022-11-06T23:59:59Z"
+    pub fn commits_in_a_day() -> String {
+        String::from(
+            r#"
+          query CommitsInADay($repo: String!, $owner: String!, $branch: String!, $since: GitTimestamp!, $until: GitTimestamp!) {
+            repository(name: $repo, owner: $owner) {
+              url
+              name
+              description
+              object(expression: $branch) {
+                ... on Commit {
+                  history(since: $since, until: $until) {
+                    edges {
+                      node {
+                        author {
+                          name
+                        }
+                        committedDate
+                        changedFiles
+                        messageHeadline
+                        oid
+                        url
+                      }
+                    }
+                    totalCount
+                  }
+                }
+              }
+            }
+          }
+          "#,
         )
     }
 }
