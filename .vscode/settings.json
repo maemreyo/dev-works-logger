@@ -5,6 +5,7 @@
 		"chrono",
 		"clippy",
 		"cocogitto",
+		"Datelike",
 		"defination",
 		"dockerfiles",
 		"dotenv",
